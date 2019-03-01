@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
-//import { weatherMapReducer } from 'features/WeatherMap'
+import { reducer as issuesViewer } from 'features/issuesViewer'
 
 const rootReducer = combineReducers({
-  // weatherMap: weatherMapReducer,
+  routing: routerReducer,
+  issuesViewer
 })
 
 export default rootReducer

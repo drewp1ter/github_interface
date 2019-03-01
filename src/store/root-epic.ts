@@ -1,9 +1,7 @@
 import { combineEpics } from 'redux-observable'
 
-// import { epics as weatherMapEpics } from 'features/WeatherMap'
-// import { epics as appEpics } from 'features/App'
+import { epics as issuesViewerEpics } from 'features/issuesViewer'
 
 export default combineEpics(
-   // ...weatherMapEpics,
-  // ...appEpics
-  )
+  ...issuesViewerEpics,
+)

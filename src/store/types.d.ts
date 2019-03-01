@@ -1,8 +1,8 @@
-// import { StateType } from 'typesafe-actions'
-// import { WeatherMapAction } from 'features/WeatherMap'
-// import rootReducer from './root-reducer'
+import { StateType } from 'typesafe-actions'
+import { IssuesViewerAction } from 'features/issuesViewer'
+import rootReducer from './root-reducer'
 
-// declare module 'Types' {
-  //  export type RootState = StateType<typeof rootReducer>
-  //  export type RootAction = WeatherMapAction
-// }
+declare module 'Types' {
+  export type RootState = StateType<typeof rootReducer>
+  export type RootAction = IssuesViewerAction
+}

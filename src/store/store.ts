@@ -1,16 +1,16 @@
 import { createStore, applyMiddleware } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'
 
-// import Types from 'Types'
+import Types from 'Types'
 import { composeEnhancers } from './utils'
 import rootReducer from './root-reducer'
 import rootEpic from './root-epic'
 import services from '../services'
 
-const { loadState } = services.localStorage
-const initialState = loadState() || {}
+//const { loadState } = services.localStorage
+const initialState = {}
 
-export const epicMiddleware = createEpicMiddleware({
+export const epicMiddleware = createEpicMiddleware<Types.RootAction, Types.RootAction, Types.RootState>({
   dependencies: services
 })
 
