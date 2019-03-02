@@ -4,6 +4,13 @@ export interface IIssuesRequest {
 }
 
 export interface IIssue {
+  id: number
   created_at: string
   title: string
+  number: number
+  user: {
+    login: string
+    avatar_url: string
+    html_url: string
+  }
 }

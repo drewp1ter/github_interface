@@ -7,25 +7,30 @@ export interface IProps {
   readonly inputRef?: (node: HTMLInputElement) => void
   readonly type?: string
   readonly name?: string
+  readonly theme?: string
   readonly error?: boolean
   readonly className?: string
   readonly value?: string | number
   readonly [key: string]: any
 }
 
-export const Input: React.StatelessComponent<IProps> = ({ onChange, inputRef, error, className, ...inputProps }) => {
+const Input: React.StatelessComponent<IProps> = ({
+  type = 'text',
+  className = '',
+  theme='default',
+  error = false,
+  onChange,
+  inputRef,
+  ...inputProps
+}) => {
 
   const handleChange = ({ target: { value, name } }: React.ChangeEvent<HTMLInputElement>): void => onChange && onChange(value, name)
 
-  return (
-    <input ref={inputRef} className={[styles.input, error ? styles.error : [], className].join(' ')} onChange={handleChange} {...inputProps} />
-  )
-}
+  const _className = `${styles.input} ${styles[theme]} ${error ? styles.error : ''} ${className}`
 
-Input.defaultProps = {
-  type: 'text',
-  className: '',
-  error: false
+  return (
+    <input type={type} ref={inputRef} className={_className} onChange={handleChange} {...inputProps} />
+  )
 }
 
 export default Input

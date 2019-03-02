@@ -7,16 +7,17 @@ export interface IProps {
   readonly className?: string
 }
 
-export const Header: React.StatelessComponent<IProps> = (props) => {
+const Header: React.StatelessComponent<IProps> = ({ className, title }) => {
 
-  const { className, title } = props
+  const _className = `${styles.header} ${className}`
 
   return (
-    <div className={[styles.header, className].join(' ')}>
+    <div className={_className}>
       <h5>{title}</h5>
     </div>
   )
 }
+
 
 Header.defaultProps = {
   className: ''

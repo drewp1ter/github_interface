@@ -1,15 +1,14 @@
 import * as React from 'react'
-import { from, of, fromEvent } from 'rxjs'
+import { of, fromEvent } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 import { debounceTime, map, tap, catchError, switchMap, filter, pluck } from 'rxjs/operators'
 
-import { Input, Suggestions } from 'components'
+import { Input, Button, Suggestions } from 'components'
 import { userRepos } from '../../apiEndpoints'
 import { IIssuesRequest, IIssue } from '../../models'
-import { string } from 'prop-types';
+import styles from './searching.module.scss'
 
 export interface IProps {
-  readonly findUser: (name: string) => void
   readonly fetchIssues: (request: IIssuesRequest) => void
   readonly issues: IIssue[]
   readonly className?: string
@@ -60,16 +59,15 @@ class Searching extends React.Component<IProps, IState> {
   }
 
   render = () => {
-    const { className, issues } = this.props
+    const { className } = this.props
     const { userName, reposNotFound, repos } = this.state
-    console.log(this.props)
+    const _className = `${styles.container} ${className}`
+    console.log(repos)
     return (
-      <div className={className}>
-        <div>
-          <Input inputRef={this.fetchRepos} onChange={this.handleChange} error={reposNotFound} name="userName" value={userName} />
-          <Suggestions name="repoName" onSelect={this.handleChange} suggestions={repos} />
-          <button onClick={this.handleClick}>request</button>
-        </div>
+      <div className={_className}>
+        <Input className={styles.userName} inputRef={this.fetchRepos} onChange={this.handleChange} error={reposNotFound} name="userName" value={userName} />
+        <Suggestions className={styles.suggestions} name="repoName" onSelect={this.handleChange} suggestions={repos} />
+        <Button onClick={this.handleClick}>request</Button>
       </div>
     )
   }

@@ -1,9 +1,5 @@
 import * as localStorage from './local-storage-service'
-import axios from 'axios'
-
+import pick from 'lodash/pick'
 import { ajax } from 'rxjs/ajax'
 
-export default {
-  ajax,
-  localStorage
-}
+export default { ajax, pick, localStorage }

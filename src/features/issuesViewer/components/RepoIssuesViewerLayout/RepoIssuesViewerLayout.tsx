@@ -7,7 +7,7 @@ import { Header } from 'components'
 const repoIssuesLayout: React.StatelessComponent = () => (
   <div className={styles.layout}>
     <Header title="Repo issues" />
-    <Searching className={styles.searching} findUser={() => { }} />
+    <Searching className={styles.searching} />
   </div>
 )
 

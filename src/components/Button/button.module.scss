@@ -1,0 +1,28 @@
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  line-height: 1.5;
+  border-radius: 3px;
+  font-size: inherit;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  cursor: pointer;
+}
+
+//themes
+
+.default {
+  color: #fff;
+  background-color: #1ab394;
+  border-color: #1ab394;
+  &:hover {
+    background-color: #18a689;
+    border-color: #18a689;
+    color: #FFFFFF;
+  }
+}
