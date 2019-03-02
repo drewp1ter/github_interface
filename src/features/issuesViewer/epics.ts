@@ -14,7 +14,7 @@ const fetchIssuesAction: Epic<IssuesViewerAction, IssuesViewerAction, Types.Root
     filter(isActionOf(fetchIssues.request)),
     switchMap(action => ajax.getJSON(apiEndpoints.repoIssues(action.payload)).pipe(
       map((res: any) => res.map((item: IIssue) => {
-        const picked = pick<IIssue>(item, ['id', 'number', 'created_at', 'title', 'user'])
+        const picked = pick<IIssue>(item, ['id', 'number', 'created_at', 'title', 'body', 'user'])
         return {
           ...picked,
           user: pick(picked.user, ['avatar_url', 'login', 'html_url'])

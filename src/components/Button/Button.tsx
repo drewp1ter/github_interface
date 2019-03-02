@@ -5,7 +5,7 @@ import styles from './button.module.scss'
 export interface IProps {
   readonly children?: React.ReactNode
   readonly className?: string
-  readonly theme?: string
+  readonly theme?: 'default'
   readonly onClick: () => void
 }
 

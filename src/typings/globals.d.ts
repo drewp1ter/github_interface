@@ -18,6 +18,5 @@ declare module '*.scss' {
 }
 
 declare interface RequestError {
-  cod: number
   message: string
 }
