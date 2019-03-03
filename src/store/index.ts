@@ -1,2 +1,2 @@
 export { default as rootReducer } from './root-reducer'
-export { default } from './store'
+export { default, history } from './store'

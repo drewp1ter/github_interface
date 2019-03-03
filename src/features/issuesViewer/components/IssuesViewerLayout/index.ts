@@ -1,3 +1,3 @@
 import IssuesViewerLayout from './IssuesViewerLayout'
 
-export { IssuesViewerLayout }
+export default IssuesViewerLayout

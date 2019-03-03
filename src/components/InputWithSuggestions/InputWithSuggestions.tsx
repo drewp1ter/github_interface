@@ -90,7 +90,7 @@ class Suggestions extends React.Component<IProps, IState> {
     }
   }
 
-  suggestionsList = (): React.ReactNode[] => this.state.suggestions.map((suggestion, index) => {
+  suggestionsList = (): JSX.Element[] => this.state.suggestions.map((suggestion, index) => {
     let suggestionClass = styles.suggestion
     if (index === this.state.suggestionIndex) {
       suggestionClass += ' ' + styles.suggestionCurrent
