@@ -37,7 +37,8 @@ class Searching extends React.Component<IProps, IState> {
     reposFetching: false
   }
 
-  handleChange = (value: string, name = 'def'): void => this.setState({ [name]: value })
+  handleChange = (value: string, name = 'def', onSelect = false): void =>
+    this.setState({ [name]: value }, () => onSelect && this.handleClick())
 
   fetchRepos = (node: HTMLInputElement) => {
     fromEvent(node, 'keyup').pipe(

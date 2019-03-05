@@ -8,12 +8,12 @@ export interface IProps {
   readonly name?: string
   readonly value?: string
   readonly theme: 'default'
-  readonly onChange?: (value: string, name?: string) => void
+  readonly onChange?: (value: string, name?: string, onSelect?: boolean) => void
 }
 
 export interface IState {
   readonly suggestions: string[]
-  readonly inputFocused: boolean
+  readonly showSuggestions: boolean
   readonly suggestionIndex: number
 }
 
@@ -25,22 +25,22 @@ class Suggestions extends React.Component<IProps, IState> {
 
   state = {
     suggestions: this.props.suggestions,
-    inputFocused: false,
+    showSuggestions: false,
     suggestionIndex: -1,
   }
 
   onInputFocus = () => {
-    this.setState({ inputFocused: true })
+    this.setState({ showSuggestions: true })
   }
 
   onInputBlur = () => {
-    this.setState({ inputFocused: false })
+    this.setState({ showSuggestions: false })
   }
 
   handleChange = ({ target: { value, name = '' } }: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props
     const suggestions: string[] = this.props.suggestions.filter((suggestion: string) => suggestion.includes(value!))
-    this.setState({ suggestions })
+    this.setState({ suggestions, showSuggestions: true })
     onChange && onChange(value, name)
   }
 
@@ -85,8 +85,11 @@ class Suggestions extends React.Component<IProps, IState> {
     const { onChange, name = '' } = this.props
     const { suggestions } = this.state
     if (suggestions.length >= index - 1) {
-      this.setState({ suggestionIndex: index })
-      onChange && onChange(suggestions[index], name)
+      this.setState({
+        suggestionIndex: index,
+        showSuggestions: false
+      })
+      onChange && onChange(suggestions[index], name, true)
     }
   }
 
@@ -103,7 +106,7 @@ class Suggestions extends React.Component<IProps, IState> {
   })
 
   render = () => {
-    const { inputFocused, suggestions } = this.state
+    const { showSuggestions, suggestions } = this.state
     const { className, name, theme, value } = this.props
     const _className = `${styles.container} ${className}`
     return (
@@ -121,7 +124,7 @@ class Suggestions extends React.Component<IProps, IState> {
           autoComplete="off"
         />
         {
-          inputFocused && suggestions!.length > 0 ?
+          showSuggestions && suggestions!.length > 0 ?
             <div className={styles.suggestions}>
               <div className={styles.suggestionNote}>
                 Выберите вариант или продолжите ввод
