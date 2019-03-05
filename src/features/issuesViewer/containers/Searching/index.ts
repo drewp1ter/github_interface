@@ -6,13 +6,12 @@ import * as actions from '../../actions'
 import Searching from './Searching'
 
 const mapStateToProps = (state: Types.RootState) => {
-  const { fetching, error, issues } = state.issuesViewer
-  return { fetching, error, issues }
+  const { fetching } = state.issuesViewer
+  return { fetching }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
   fetchIssues: actions.fetchIssues.request
 }, dispatch)
 
-const WrappedComponent = connect(mapStateToProps, mapDispatchToProps)(Searching)
-export default WrappedComponent
+export default connect(mapStateToProps, mapDispatchToProps)(Searching)

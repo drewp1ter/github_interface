@@ -106,13 +106,13 @@ class Suggestions extends React.Component<IProps, IState> {
     const { inputFocused, suggestions } = this.state
     const { className, name, theme, value } = this.props
     const _className = `${styles.container} ${className}`
-    const _inputClass = `${styles.input} ${styles[theme]}`
     return (
       <div className={_className}>
         <input
           value={value}
           name={name}
-          className={_inputClass}
+          className={styles.input}
+          data-theme={theme}
           onChange={this.handleChange}
           onKeyPress={this.onKeyPress}
           onKeyDown={this.onKeyPress}

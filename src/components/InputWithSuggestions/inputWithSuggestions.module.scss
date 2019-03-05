@@ -11,6 +11,8 @@
   top: 100%;
   left: 0;
   right: 0;
+  max-height: 318px;
+  overflow: auto;
 }
 
 .suggestionNote {
@@ -25,20 +27,17 @@
   cursor: pointer;
   color: #828282;
   &:hover {
-    background-color: #f5faff;
+    background-color: #d1ecf1;
   }
 }
 
 .suggestionCurrent {
-  background-color: #FFF5E7;
+  color: #fafafa;
+  background-color: #1ab394 !important;
 }
 
 .react-dadata mark {
   background: none;
-}
-
-.highlighted {
-  color: #E5841C;
 }
 
 .input {
@@ -52,7 +51,7 @@
 
 //themes
 
-.default {
+.input[data-theme=default] {
   background: #FFFFFF;
   border: 1px solid #e5e6e7;
   &:focus {

@@ -6,13 +6,13 @@
   transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 
-.error {
+.input[data-has-error=true] {
   border-color: red !important;
 }
 
 //themes
 
-.default {
+.input[data-theme=default] {
   background: #FFFFFF;
   border: 1px solid #e5e6e7;
   &:focus {

@@ -1,12 +1,26 @@
-.container {
+.wrapper {
   display: flex;
+  align-items: flex-end;
 }
 
-.suggestions {
-  flex: 1 1;
-  margin: 0 20px;
+.repoName {
+  flex: 1;
+  margin-right: 50px;
 }
 
-.userName {
+.spinner {
+  width: 50px;
+}
+
+.userNameInput {
   width: 200px;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+.button {
+  height: 28px;
 }

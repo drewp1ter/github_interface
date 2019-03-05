@@ -1,3 +1,4 @@
 import Searching from './Searching'
+import SearchingResults from './SearchingResults'
 
-export { Searching }
+export { Searching, SearchingResults }
