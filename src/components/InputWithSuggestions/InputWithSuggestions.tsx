@@ -40,7 +40,7 @@ class Suggestions extends React.Component<IProps, IState> {
   handleChange = ({ target: { value, name = '' } }: React.ChangeEvent<HTMLInputElement>) => {
     const { onChange } = this.props
     const suggestions: string[] = this.props.suggestions.filter((suggestion: string) => suggestion.includes(value!))
-    this.setState({ suggestions, showSuggestions: true })
+    this.setState({ suggestions, showSuggestions: true, suggestionIndex: -1 })
     onChange && onChange(value, name)
   }
 
