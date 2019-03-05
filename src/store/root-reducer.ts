@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 
-import issuesViewer from 'features/issuesViewer'
+import issuesSearching from 'features/issuesSearching'
 
 export default combineReducers({
   routing: routerReducer,
-  issuesViewer: issuesViewer.reducer
+  issuesViewer: issuesSearching.reducer
 })

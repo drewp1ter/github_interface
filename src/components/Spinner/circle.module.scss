@@ -99,10 +99,10 @@
   }
 }
 
-.skSpinnerCircle div[data-theme=default]::before {
+.skSpinnerCircle div[data-theme="default"]::before {
   background-color: #1ab394;
 }
 
-.skSpinnerCircle div[data-theme=light]::before {
+.skSpinnerCircle div[data-theme="light"]::before {
   background-color: #dfdfdf;
 }

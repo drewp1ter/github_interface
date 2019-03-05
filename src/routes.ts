@@ -1,12 +1,12 @@
 import MainLayout from 'components/MainLayout'
-import issuesViewer from 'features/issuesViewer'
+import issuesSearching from 'features/issuesSearching'
 
 const routes = [
   {
     path: '/',
     component: MainLayout,
     routes: [
-      ...issuesViewer.routes,
+      ...issuesSearching.routes,
     ]
   }
 ]

@@ -1,7 +1,7 @@
 import { combineEpics } from 'redux-observable'
 
-import { epics as issuesViewerEpics } from 'features/issuesViewer'
+import { epics as issuesSearchingEpics } from 'features/issuesSearching'
 
 export default combineEpics(
-  ...issuesViewerEpics,
+  ...issuesSearchingEpics,
 )

@@ -4,7 +4,7 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: components.IssuesViewerLayout
+    component: components.IssuesSearching
   }
 ]
 

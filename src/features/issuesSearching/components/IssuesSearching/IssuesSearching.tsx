@@ -1,10 +1,10 @@
 import * as React from 'react'
 
 import { Searching, SearchingResults } from '../../containers'
-import styles from './issuesViewerLayout.module.scss'
+import styles from './issuesSearching.module.scss'
 import { Header } from 'components'
 
-const IssuesViewerLayout: React.StatelessComponent = () => (
+const IssuesSearching: React.StatelessComponent = () => (
   <div className={styles.layout}>
     <Header title="Repo issues" />
     <Searching className={styles.searching} />
@@ -12,4 +12,4 @@ const IssuesViewerLayout: React.StatelessComponent = () => (
   </div>
 )
 
-export default IssuesViewerLayout
+export default IssuesSearching

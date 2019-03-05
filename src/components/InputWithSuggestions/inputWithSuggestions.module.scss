@@ -7,7 +7,7 @@
   position: absolute;
   z-index: 10;
   background-color: #fff;
-  box-shadow: 0 1px 6px 3px rgba(0,0,0,.1);
+  box-shadow: 0 1px 6px 3px rgba(0, 0, 0, 0.1);
   top: 100%;
   left: 0;
   right: 0;
@@ -51,8 +51,8 @@
 
 //themes
 
-.input[data-theme=default] {
-  background: #FFFFFF;
+.input[data-theme="default"] {
+  background: #ffffff;
   border: 1px solid #e5e6e7;
   &:focus {
     border-color: #1ab394;

@@ -3,10 +3,6 @@ export interface IIssuesRequest {
   repoName: string
 }
 
-export interface IReposSuggestions {
-  [key: number]: string
-}
-
 export interface IIssue {
   id: number
   created_at: string
