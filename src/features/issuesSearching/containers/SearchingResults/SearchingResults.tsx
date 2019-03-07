@@ -1,23 +1,26 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { IIssue } from '../../models'
+import { IIssues, IIssue } from '../../models'
 import styles from './searchingResults.module.scss'
+import issuesSearching from 'features/issuesSearching'
 
 export interface IProps {
-  readonly issues: IIssue[]
+  readonly issues: IIssues
 }
 
 const SearchingResults: React.StatelessComponent<IProps> = ({ issues }) => {
 
-  const issuesList = (): JSX.Element[] => issues.map((issue: IIssue) =>
+  const issuesList = (): JSX.Element[] => issues.payload.map((issue: IIssue) =>
     <div key={issue.id} className={styles.item}>
       <a className={styles.avatar} href={issue.user.html_url}>
         <img src={issue.user.avatar_url} alt="" />
         <div className={styles.nick}>{issue.user.login}</div>
       </a>
       <div className={styles.itemBody}>
-        <h4>{issue.title}</h4>
+        <Link to={`issue_details/${issues.userName}/${issues.repoName}/${issue.id}`}>
+          <h4>{issue.title}</h4>
+        </Link>
         <span>#{issue.number} openned on {issue.created_at}</span>
       </div>
     </div>

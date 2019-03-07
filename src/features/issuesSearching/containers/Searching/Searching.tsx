@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { of, fromEvent } from 'rxjs'
+import { of, fromEvent, Subscription } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 import { debounceTime, map, tap, catchError, switchMap, filter, pluck } from 'rxjs/operators'
 
@@ -37,11 +37,22 @@ class Searching extends React.Component<IProps, IState> {
     reposFetching: false
   }
 
+  userNameSubscription: any = null
+
+  componentWillUnmount = () => this.userNameSubscription.unsubscribe()
+
   handleChange = (value: string, name = 'def', onSelect = false): void =>
     this.setState({ [name]: value }, () => onSelect && this.handleClick())
 
+  handleClick = () => {
+    const { fetchIssues } = this.props
+    const { userName, repoName } = this.state
+    fetchIssues({ userName, repoName })
+  }
+
   fetchRepos = (node: HTMLInputElement) => {
-    fromEvent(node, 'keyup').pipe(
+    if (!node) return
+    this.userNameSubscription = fromEvent(node, 'keyup').pipe(
       tap(() => this.setState({ reposNotFound: false })),
       pluck('target', 'value'),
       map(value => value as string),
@@ -63,12 +74,6 @@ class Searching extends React.Component<IProps, IState> {
       reposSuggestions,
       reposFetching: false
     }))
-  }
-
-  handleClick = () => {
-    const { fetchIssues } = this.props
-    const { userName, repoName } = this.state
-    fetchIssues({ userName, repoName })
   }
 
   render = () => {

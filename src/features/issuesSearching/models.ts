@@ -15,3 +15,9 @@ export interface IIssue {
     html_url: string
   }
 }
+
+export interface IIssues {
+  userName: string,
+  repoName: string,
+  payload: IIssue[]
+}

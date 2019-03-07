@@ -20,6 +20,10 @@ const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Type
           user: pick(picked.user, ['avatar_url', 'login', 'html_url'])
         }
       })),
+      map(payload => ({
+        ...action.payload,
+        payload
+      })),
       map(fetchIssues.success),
       catchError(error => of(fetchIssues.failure(error)))
     )
