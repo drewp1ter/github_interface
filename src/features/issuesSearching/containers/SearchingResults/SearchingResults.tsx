@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { IIssues, IIssue } from '../../models'
 import styles from './searchingResults.module.scss'
-import issuesSearching from 'features/issuesSearching'
 
 export interface IProps {
   readonly issues: IIssues

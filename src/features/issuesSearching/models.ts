@@ -21,3 +21,17 @@ export interface IIssues {
   repoName: string,
   payload: IIssue[]
 }
+
+export const createIssue = (props?: IIssue): IIssue => ({
+  id: -1,
+  created_at: '',
+  title: '',
+  body: '',
+  number: -1,
+  user: {
+    login: '',
+    avatar_url: '',
+    html_url: ''
+  },
+  ...props
+})

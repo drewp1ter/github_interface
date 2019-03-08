@@ -25,9 +25,8 @@ const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Type
         payload
       })),
       map(fetchIssues.success),
-      catchError(error => of(fetchIssues.failure(error)))
-    )
-    )
+      catchError(error => of(fetchIssues.failure(error!.xhr!.response || error)))
+    ))
   )
 
 export default [
