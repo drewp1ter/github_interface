@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.6",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
@@ -36,6 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
     "@types/history": "^4.7.2",
     "@types/jest": "24.0.6",
     "@types/lodash": "^4.14.121",

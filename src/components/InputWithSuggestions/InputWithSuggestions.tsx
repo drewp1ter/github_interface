@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames'
 
 import styles from './inputWithSuggestions.module.scss'
 
@@ -38,79 +39,99 @@ class Suggestions extends React.Component<IProps, IState> {
   }
 
   handleChange = ({ target: { value, name = '' } }: React.ChangeEvent<HTMLInputElement>) => {
-    const { onChange } = this.props
-    const suggestions: string[] = this.props.suggestions.filter((suggestion: string) => suggestion.includes(value!))
-    this.setState({ suggestions, showSuggestions: true, suggestionIndex: -1 })
-    onChange && onChange(value, name)
+    try {
+      const { onChange } = this.props
+      const suggestions: string[] = this.props.suggestions.filter((suggestion: string) => suggestion.includes(value!))
+      this.setState({ suggestions, showSuggestions: true, suggestionIndex: -1 })
+      onChange && onChange(value, name)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    const { suggestionIndex, suggestions } = this.state
-    const { onChange, name } = this.props
-    switch (event.which) {
-      case 40: { // Arrow down
-        event.preventDefault()
-        if (suggestionIndex < suggestions.length - 1) {
-          const newSuggestionIndex = suggestionIndex + 1
-          this.setState({ suggestionIndex: newSuggestionIndex })
-          onChange && onChange(suggestions[newSuggestionIndex], name)
+    try {
+      const { suggestionIndex, suggestions } = this.state
+      const { onChange, name } = this.props
+      switch (event.which) {
+        case 40: { // Arrow down
+          event.preventDefault()
+          if (suggestionIndex < suggestions.length - 1) {
+            const newSuggestionIndex = suggestionIndex + 1
+            this.setState({ suggestionIndex: newSuggestionIndex })
+            onChange && onChange(suggestions[newSuggestionIndex], name)
+          }
+          break
         }
-        break
-      }
-      case 38: { // Arrow up
-        event.preventDefault()
-        if (suggestionIndex > 0) {
-          const newSuggestionIndex = suggestionIndex - 1
-          this.setState({ suggestionIndex: newSuggestionIndex })
-          onChange && onChange(suggestions[newSuggestionIndex], name)
+        case 38: { // Arrow up
+          event.preventDefault()
+          if (suggestionIndex > 0) {
+            const newSuggestionIndex = suggestionIndex - 1
+            this.setState({ suggestionIndex: newSuggestionIndex })
+            onChange && onChange(suggestions[newSuggestionIndex], name)
+          }
+          break
         }
-        break
+        case 13: { // Enter
+          event.preventDefault()
+          suggestionIndex >= 0 && this.selectSuggestion(suggestionIndex)
+          break
+        }
+        default:
       }
-      case 13: { // Enter
-        event.preventDefault()
-        suggestionIndex >= 0 && this.selectSuggestion(suggestionIndex)
-        break
-      }
-      default:
+    } catch (e) {
+      console.error(e)
     }
   }
 
   onSuggestionClick = (event: React.MouseEvent<HTMLElement>) => {
-    const index = event.currentTarget.getAttribute('data-index') || -1
-    this.selectSuggestion(+index)
-    event.stopPropagation()
+    try {
+      const index = event.currentTarget.dataset.index || -1
+      this.selectSuggestion(+index)
+      event.stopPropagation()
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   selectSuggestion = (index: number) => {
-    const { onChange, name = '' } = this.props
-    const { suggestions } = this.state
-    if (suggestions.length >= index - 1) {
-      this.setState({
-        suggestionIndex: index,
-        showSuggestions: false
-      })
-      onChange && onChange(suggestions[index], name, true)
+    try {
+      const { onChange, name = '' } = this.props
+      const { suggestions } = this.state
+      if (suggestions.length >= index - 1) {
+        this.setState({
+          suggestionIndex: index,
+          showSuggestions: false
+        })
+        onChange && onChange(suggestions[index], name, true)
+      }
+    } catch (e) {
+      console.error(e)
     }
   }
 
-  suggestionsList = (): JSX.Element[] => this.state.suggestions.map((suggestion, index) => {
-    let suggestionClass = styles.suggestion
-    if (index === this.state.suggestionIndex) {
-      suggestionClass += ' ' + styles.suggestionCurrent
+  suggestionsList = (): JSX.Element[] => {
+    try {
+      return this.state.suggestions.map((suggestion, index) => {
+        const suggestionClass = classNames(styles.suggestion, { [styles.suggestionCurrent]: index === this.state.suggestionIndex })
+        return (
+          <div className={suggestionClass} key={index} data-index={index} onMouseDown={this.onSuggestionClick}>
+            {suggestion}
+          </div>
+        )
+      })
+    } catch (e) {
+      console.error(e)
+      return []
     }
-    return (
-      <div className={suggestionClass} key={index} data-index={index} onMouseDown={this.onSuggestionClick}>
-        {suggestion}
-      </div>
-    )
-  })
+  }
 
   render = () => {
     const { showSuggestions, suggestions } = this.state
     const { className, name, theme, value } = this.props
-    const _className = `${styles.container} ${className}`
+    const wrpClass = classNames(styles.container, className)
     return (
-      <div className={_className}>
+      <div className={wrpClass}>
         <input
           value={value}
           name={name}
@@ -124,14 +145,14 @@ class Suggestions extends React.Component<IProps, IState> {
           autoComplete="off"
         />
         {
-          showSuggestions && suggestions!.length > 0 ?
+          showSuggestions && suggestions!.length > 0 && (
             <div className={styles.suggestions}>
               <div className={styles.suggestionNote}>
                 Выберите вариант или продолжите ввод
               </div>
               {this.suggestionsList()}
             </div>
-            : null
+          )
         }
       </div>
     )

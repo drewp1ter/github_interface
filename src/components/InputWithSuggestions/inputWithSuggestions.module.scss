@@ -1,61 +1,60 @@
 .container {
-  position: relative;
-  display: flex;
+    position: relative;
+    display: flex;
 }
 
 .suggestions {
-  position: absolute;
-  z-index: 10;
-  background-color: #fff;
-  box-shadow: 0 1px 6px 3px rgba(0, 0, 0, 0.1);
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 318px;
-  overflow: auto;
+    position: absolute;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 1px 6px 3px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 318px;
+    overflow: auto;
 }
 
 .suggestionNote {
-  font-size: 14px;
-  color: #828282;
-  padding: 10px 10px 5px 10px;
+    font-size: 14px;
+    color: #828282;
+    padding: 10px 10px 5px 10px;
 }
 
 .suggestion {
-  font-size: 15px;
-  padding: 7px 10px;
-  cursor: pointer;
-  color: #828282;
-  &:hover {
-    background-color: #d1ecf1;
-  }
+    font-size: 15px;
+    padding: 7px 10px;
+    cursor: pointer;
+    color: #828282;
+    &:hover {
+        background-color: #d1ecf1;
+    }
 }
 
 .suggestionCurrent {
-  color: #fafafa;
-  background-color: #1ab394 !important;
+    color: #fafafa;
+    background-color: #1ab394 !important;
 }
 
 .react-dadata mark {
-  background: none;
+    background: none;
 }
 
 .input {
-  width: 100%;
-  border-radius: 1px;
-  color: inherit;
-  display: block;
-  padding: 6px 12px;
-  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
 }
 
 //themes
-
 .input[data-theme="default"] {
-  background: #ffffff;
-  border: 1px solid #e5e6e7;
-  &:focus {
-    border-color: #1ab394;
-    outline: none;
-  }
+    background: #ffffff;
+    border: 1px solid #e5e6e7;
+    &:focus {
+        border-color: #1ab394;
+        outline: none;
+    }
 }

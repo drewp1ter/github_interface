@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames'
 
 import Spinner from '../Spinner'
 import styles from './button.module.scss'
@@ -22,10 +23,10 @@ const Button: React.StatelessComponent<IProps> = ({
   disabled = false
 }) => {
 
-  const _className = `${styles.button} ${className}`
+  const btnClass = classNames(styles.button, className)
 
   return (
-    <button className={_className} disabled={disabled} data-theme={theme} data-size={size} onClick={onClick}>
+    <button className={btnClass} disabled={disabled} data-theme={theme} data-size={size} onClick={onClick}>
       <span className={styles.children} data-loading={loading}>{children}</span>
       {
         loading &&

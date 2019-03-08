@@ -1,4 +1,5 @@
 import * as React from 'react'
+import classNames from 'classnames'
 
 import styles from './header.module.scss'
 
@@ -9,10 +10,10 @@ export interface IProps {
 
 const Header: React.StatelessComponent<IProps> = ({ className, title }) => {
 
-  const _className = `${styles.header} ${className}`
+  const hdrClass = classNames(styles.header, className)
 
   return (
-    <div className={_className}>
+    <div className={hdrClass}>
       <h5>{title}</h5>
     </div>
   )

@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { of, fromEvent, Subscription } from 'rxjs'
+import { of, fromEvent } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
 import { debounceTime, map, tap, catchError, switchMap, filter, pluck } from 'rxjs/operators'
+import classNames from 'classnames'
 
 import { Input, Button, InputWithSuggestions, Spinner } from 'components'
 import { userRepos } from '../../apiEndpoints'
@@ -51,37 +52,41 @@ class Searching extends React.Component<IProps, IState> {
   }
 
   fetchRepos = (node: HTMLInputElement) => {
-    if (!node) return
-    this.userNameSubscription = fromEvent(node, 'keyup').pipe(
-      tap(() => this.setState({ reposNotFound: false })),
-      pluck('target', 'value'),
-      map(value => value as string),
-      filter(value => value !== ''),
-      debounceTime(800),
-      tap(() => this.setState({ reposFetching: true })),
-      switchMap(value => ajax.getJSON(userRepos(value)).pipe(
-        map(res => res as { name: string }[]),
-        map(res => res.map(({ name }) => name)),
-        catchError(() => {
-          this.setState({
-            reposNotFound: true,
-            reposFetching: false
+    try {
+      if (!node) return
+      this.userNameSubscription = fromEvent(node, 'keyup').pipe(
+        tap(() => this.setState({ reposNotFound: false })),
+        pluck('target', 'value'),
+        map(value => value as string),
+        filter(value => value !== ''),
+        debounceTime(800),
+        tap(() => this.setState({ reposFetching: true })),
+        switchMap(value => ajax.getJSON(userRepos(value)).pipe(
+          map(res => res as { name: string }[]),
+          map(res => res.map(({ name }) => name)),
+          catchError(() => {
+            this.setState({
+              reposNotFound: true,
+              reposFetching: false
+            })
+            return of([])
           })
-          return of([])
-        })
-      ))
-    ).subscribe(reposSuggestions => this.setState({
-      reposSuggestions,
-      reposFetching: false
-    }))
+        ))
+      ).subscribe(reposSuggestions => this.setState({
+        reposSuggestions,
+        reposFetching: false
+      }))
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   render = () => {
     const { className, fetching } = this.props
     const { userName, repoName, reposNotFound, reposSuggestions, reposFetching } = this.state
-    const _className = `${styles.wrapper} ${className}`
+    const wrpClass = classNames(styles.wrapper, className)
     return (
-      <div className={_className}>
+      <div className={wrpClass}>
         <div>
           <label className={styles.label}>User name</label>
           <Input className={styles.userNameInput} inputRef={this.fetchRepos} onChange={this.handleChange} error={reposNotFound} name="userName" value={userName} />
