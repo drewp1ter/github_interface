@@ -6,13 +6,14 @@ import circle from './circle.module.scss'
 export interface IProps {
   type?: 'wave' | 'circle'
   theme?: 'default' | 'light'
+  size?: 'sm' | 'md'
 }
 
-const Spinner: React.StatelessComponent<IProps> = ({ type = 'wave', theme = 'default' }) => {
+const Spinner: React.StatelessComponent<IProps> = ({ type = 'wave', theme = 'default', size='md' }) => {
   switch (type) {
     case 'wave':
       return (
-        <div className={wave.skSpinnerWave} data-theme={theme} >
+        <div className={wave.skSpinnerWave} data-theme={theme} data-size={size}>
           <div className={wave.skRect1} data-theme={theme} />
           <div className={wave.skRect2} data-theme={theme} />
           <div className={wave.skRect3} data-theme={theme} />
@@ -22,7 +23,7 @@ const Spinner: React.StatelessComponent<IProps> = ({ type = 'wave', theme = 'def
       )
     case 'circle':
       return (
-        <div className={circle.skSpinnerCircle}>
+        <div className={circle.skSpinnerCircle} data-size={size}>
           <div className={circle.skCircle1} data-theme={theme} />
           <div className={circle.skCircle2} data-theme={theme} />
           <div className={circle.skCircle3} data-theme={theme} />

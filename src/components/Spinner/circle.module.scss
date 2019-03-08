@@ -1,7 +1,5 @@
 .skSpinnerCircle {
     margin: 0 auto;
-    width: 22px;
-    height: 22px;
     position: relative;
     div {
         width: 100%;
@@ -99,10 +97,22 @@
     }
 }
 
+//themes
 .skSpinnerCircle div[data-theme="default"]::before {
     background-color: #1ab394;
 }
 
 .skSpinnerCircle div[data-theme="light"]::before {
     background-color: #dfdfdf;
+}
+
+//sizes
+.skSpinnerCircle[data-size="sm"] {
+    width: 22px;
+    height: 22px;
+}
+
+.skSpinnerCircle[data-size="md"] {
+    width: 66px;
+    height: 66px;
 }
