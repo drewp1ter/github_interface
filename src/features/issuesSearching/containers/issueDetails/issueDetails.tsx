@@ -36,7 +36,7 @@ class IssueDetails extends React.Component<IProps, IState> {
       const issue = issues.payload.find(issue => issue.id === +params.id)
       issue && this.setState({ issue })
     } else {
-      fetchIssues({ userName: params.userName, repoName: params.repoName })
+      fetchIssues({ userName: params.userName, repoName: params.repoName, issuesState: 'all' })
     }
   }
 

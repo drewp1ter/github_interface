@@ -1,6 +1,7 @@
 export interface IIssuesRequest {
   userName: string
   repoName: string
+  issuesState: 'all' | 'open' | 'closed'
 }
 
 export interface IIssue {

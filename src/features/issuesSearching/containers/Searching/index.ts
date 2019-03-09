@@ -6,8 +6,8 @@ import * as actions from '../../actions'
 import Searching from './Searching'
 
 const mapStateToProps = (state: Types.RootState) => {
-  const { fetching } = state.issuesViewer
-  return { fetching }
+  const { fetching, issues, error } = state.issuesViewer
+  return { fetching, issues, error }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({

@@ -1,0 +1,55 @@
+$primary: #1ab394;
+$gray: #c8ccd4;
+.radio {
+    position: relative;
+    cursor: pointer;
+    line-height: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    .label {
+        position: relative;
+        display: block;
+        float: left;
+        margin-right: 10px;
+        width: 16px;
+        height: 16px;
+        border: 2px solid $gray;
+        border-radius: 100%;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 10px;
+            height: 10px;
+            border-radius: 100%;
+            transform: scale(0);
+            transition: all 0.2s ease;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+    }
+    input:checked+.label::after {
+        transform: scale(1);
+        transition: all 0.2s cubic-bezier(0.35, 0.9, 0.4, 0.9);
+        opacity: 1;
+    }
+}
+
+.radio:hover .label::after {
+    transform: scale(2.6);
+}
+
+.hidden {
+    display: none;
+}
+
+//themes
+.radio[data-theme="default"] {
+    .label:after {
+        background: $primary;
+    }
+    input:checked+.label {
+        border-color: $primary;
+    }
+}

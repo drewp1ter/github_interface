@@ -152,7 +152,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
           showSuggestions && suggestions!.length > 0 && (
             <div className={styles.suggestions}>
               <div className={styles.suggestionNote}>
-                Выберите вариант или продолжите ввод
+                select variant or continue typing
               </div>
               {this.suggestionsList()}
             </div>
