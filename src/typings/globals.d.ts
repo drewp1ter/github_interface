@@ -19,4 +19,5 @@ declare module '*.scss' {
 
 declare interface RequestError {
   message: string
+  status: number
 }

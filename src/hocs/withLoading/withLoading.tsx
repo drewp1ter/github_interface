@@ -7,9 +7,10 @@ const withLoading = <Props extends { fetching: boolean }>(WrappedComponent: Reac
   (props: Props) => {
 
     return props.fetching ? (
-      <div className={styles.spinner}>
-        <Spinner type='circle' size="md" />
-      </div>
+      <>
+        <WrappedComponent {...props} />
+        <Spinner className={styles.spinner} type='circle' size="md" />
+      </>
     ) : <WrappedComponent {...props} />
 
   }

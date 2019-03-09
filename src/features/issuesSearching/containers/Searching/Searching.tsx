@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { of, fromEvent } from 'rxjs'
 import { ajax } from 'rxjs/ajax'
-import { debounceTime, map, tap, catchError, switchMap, filter, pluck } from 'rxjs/operators'
+import { debounceTime, map, tap, catchError, switchMap, filter, pluck, timeout } from 'rxjs/operators'
 import classNames from 'classnames'
 
 import { Input, Button, InputWithSuggestions, Spinner } from 'components'
 import { userRepos } from '../../apiEndpoints'
 import { IIssuesRequest } from '../../models'
 import styles from './searching.module.scss'
+import Suggestions from 'components/InputWithSuggestions/InputWithSuggestions';
 
 export interface IProps {
   readonly fetchIssues: (request: IIssuesRequest) => void
@@ -62,6 +63,7 @@ class Searching extends React.Component<IProps, IState> {
         debounceTime(800),
         tap(() => this.setState({ reposFetching: true })),
         switchMap(value => ajax.getJSON(userRepos(value)).pipe(
+          timeout(10000),
           map(res => res as { name: string }[]),
           map(res => res.map(({ name }) => name)),
           catchError(() => {
@@ -89,14 +91,27 @@ class Searching extends React.Component<IProps, IState> {
       <div className={wrpClass}>
         <div>
           <label className={styles.label}>User name</label>
-          <Input className={styles.userNameInput} inputRef={this.fetchRepos} onChange={this.handleChange} error={reposNotFound} name="userName" value={userName} />
+          <Input
+            className={styles.userNameInput}
+            inputRef={this.fetchRepos}
+            onChange={this.handleChange}
+            hasError={reposNotFound}
+            name="userName"
+            value={userName}
+          />
         </div>
         <div className={styles.spinner}>
           {reposFetching && <Spinner />}
         </div>
         <div className={styles.repoName}>
           <label className={styles.label}>Repository name</label>
-          <InputWithSuggestions name="repoName" onChange={this.handleChange} suggestions={reposSuggestions} value={repoName} />
+          <InputWithSuggestions
+            name="repoName"
+            onChange={this.handleChange}
+            suggestions={reposSuggestions}
+            //hasError={!!reposSuggestions.length && !!repoName && !reposSuggestions.includes(repoName)}
+            value={repoName}
+          />
         </div>
         <Button onClick={this.handleClick} disabled={fetching} loading={fetching}>Search</Button>
       </div>

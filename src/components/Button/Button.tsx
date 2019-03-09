@@ -29,10 +29,7 @@ const Button: React.StatelessComponent<IProps> = ({
     <button className={btnClass} disabled={disabled} data-theme={theme} data-size={size} onClick={onClick}>
       <span className={styles.children} data-loading={loading}>{children}</span>
       {
-        loading &&
-        <div className={styles.spinner}>
-          <Spinner type="circle" theme="light" />
-        </div>
+        loading && <Spinner className={styles.spinner} type="circle" theme="light" />
       }
     </button>
   )

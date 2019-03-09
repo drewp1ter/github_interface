@@ -1,7 +1,5 @@
 .skSpinnerWave {
     margin: 0 auto;
-    width: 50px;
-    height: 30px;
     text-align: center;
     font-size: 10px;
     div {
@@ -36,10 +34,17 @@
     }
 }
 
+//themes
 .skSpinnerWave div[data-theme="default"] {
     background-color: #1ab394;
 }
 
 .skSpinnerWave div[data-theme="light"] {
     background-color: #dfdfdf;
+}
+
+//sizes
+.skSpinnerWave[data-size="sm"] {
+    width: 50px;
+    height: 30px;
 }

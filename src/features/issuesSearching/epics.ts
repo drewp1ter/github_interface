@@ -1,6 +1,6 @@
 import Types from 'Types'
 import { Epic } from 'redux-observable'
-import { filter, switchMap, map, catchError } from 'rxjs/operators'
+import { filter, switchMap, map, catchError, timeout } from 'rxjs/operators'
 import { isActionOf } from 'typesafe-actions'
 import { of } from 'rxjs'
 
@@ -13,6 +13,7 @@ const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Type
   action$.pipe(
     filter(isActionOf(fetchIssues.request)),
     switchMap(action => ajax.getJSON(apiEndpoints.repoIssues(action.payload)).pipe(
+      timeout(10000),
       map((res: any) => res.map((item: IIssue) => {
         const picked = pick<IIssue>(item, ['id', 'number', 'created_at', 'title', 'body', 'user'])
         return {
@@ -25,7 +26,7 @@ const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Type
         payload
       })),
       map(fetchIssues.success),
-      catchError(error => of(fetchIssues.failure(error!.xhr!.response || error)))
+      catchError(error => of(fetchIssues.failure(error.response ? { message: error.response.message, status: error.status } : error)))
     ))
   )
 

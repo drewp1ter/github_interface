@@ -16,5 +16,5 @@ export type IssuesSearchingAction = ActionType<typeof actions>
 export default combineReducers<IIssuesSearchingState, IssuesSearchingAction>({
   issues: (state = { userName: '', repoName: '', payload: [] }, action) => action.type === types.FETCH_ISSUES_SUCCESS ? action.payload : state,
   fetching: (state = false, action) => action.type === types.FETCH_ISSUES_REQUEST || state && !(types.FETCH_ISSUES_SUCCESS || types.FETCH_ISSUES_FAILURE),
-  error: (state, action) => action.type === types.FETCH_ISSUES_FAILURE ? action.payload : { message: '' }
+  error: (state, action) => action.type === types.FETCH_ISSUES_FAILURE ? action.payload : { message: '', status: 0 }
 })

@@ -8,8 +8,10 @@ export interface IProps {
   readonly className?: string
   readonly name?: string
   readonly value?: string
-  readonly theme: 'default'
+  readonly theme?: 'default'
+  readonly hasError?: boolean
   readonly onChange?: (value: string, name?: string, onSelect?: boolean) => void
+  readonly placeholder?: string
 }
 
 export interface IState {
@@ -18,7 +20,7 @@ export interface IState {
   readonly suggestionIndex: number
 }
 
-class Suggestions extends React.Component<IProps, IState> {
+class InputWithSuggestions extends React.Component<IProps, IState> {
 
   static defaultProps: { theme?: string } = {
     theme: 'default'
@@ -128,14 +130,15 @@ class Suggestions extends React.Component<IProps, IState> {
 
   render = () => {
     const { showSuggestions, suggestions } = this.state
-    const { className, name, theme, value } = this.props
+    const { className, name, theme, value, hasError, placeholder } = this.props
     const wrpClass = classNames(styles.container, className)
+    const inptClass = classNames(styles.input, { [styles.hasError]: hasError })
     return (
       <div className={wrpClass}>
         <input
           value={value}
           name={name}
-          className={styles.input}
+          className={inptClass}
           data-theme={theme}
           onChange={this.handleChange}
           onKeyPress={this.onKeyPress}
@@ -143,6 +146,7 @@ class Suggestions extends React.Component<IProps, IState> {
           onFocus={this.onInputFocus}
           onBlur={this.onInputBlur}
           autoComplete="off"
+          placeholder={placeholder}
         />
         {
           showSuggestions && suggestions!.length > 0 && (
@@ -159,4 +163,4 @@ class Suggestions extends React.Component<IProps, IState> {
   }
 }
 
-export default Suggestions
+export default InputWithSuggestions
