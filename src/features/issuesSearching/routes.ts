@@ -7,13 +7,13 @@ const routes: RouteConfig[] = [
   {
     path: '/',
     exact: true,
-    component: components.IssuesSearching
+    component: components.IssuesSearching,
   },
   {
     path: '/issue_details/:userName/:repoName/:id',
     exact: true,
-    component: containers.IssueDetails
-  }
+    component: containers.IssueDetails,
+  },
 ]
 
 export default routes

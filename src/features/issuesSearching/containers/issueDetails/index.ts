@@ -11,8 +11,15 @@ const mapStateToProps = (state: Types.RootState) => {
   return { fetching, issues, error }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
-  fetchIssues: actions.fetchIssues.request
-}, dispatch)
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      fetchIssues: actions.fetchIssues.request,
+    },
+    dispatch
+  )
 
-export default connect(mapStateToProps, mapDispatchToProps)(withLoading(IssueDetails))
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withLoading(IssueDetails))

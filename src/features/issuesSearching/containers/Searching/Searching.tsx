@@ -21,15 +21,14 @@ interface IProps {
 
 interface IState extends IIssuesRequest {
   readonly [key: string]: any
-  readonly reposSuggestions: string[],
+  readonly reposSuggestions: string[]
   readonly reposNotFound: boolean
   readonly reposFetching: boolean
 }
 
 class Searching extends React.Component<IProps & PropsFromDispatch & IIssuesSearchingState, IState> {
-
   static defaultProps = {
-    className: ''
+    className: '',
   }
 
   state: IState = {
@@ -38,7 +37,7 @@ class Searching extends React.Component<IProps & PropsFromDispatch & IIssuesSear
     reposSuggestions: [],
     reposNotFound: false,
     reposFetching: false,
-    issuesState: 'all'
+    issuesState: 'all',
   }
 
   userNameSubscription: any = null
@@ -57,29 +56,35 @@ class Searching extends React.Component<IProps & PropsFromDispatch & IIssuesSear
   fetchRepos = (node: HTMLInputElement) => {
     try {
       if (!node) return
-      this.userNameSubscription = fromEvent(node, 'keyup').pipe(
-        tap(() => this.setState({ reposNotFound: false })),
-        pluck('target', 'value'),
-        map(value => value as string),
-        filter(value => value !== ''),
-        debounceTime(800),
-        tap(() => this.setState({ reposFetching: true })),
-        switchMap(value => ajax.getJSON(userRepos(value)).pipe(
-          timeout(10000),
-          map(res => res as { name: string }[]),
-          map(res => res.map(({ name }) => name)),
-          catchError(() => {
-            this.setState({
-              reposNotFound: true,
-              reposFetching: false
-            })
-            return of([])
+      this.userNameSubscription = fromEvent(node, 'keyup')
+        .pipe(
+          tap(() => this.setState({ reposNotFound: false })),
+          pluck('target', 'value'),
+          map(value => value as string),
+          filter(value => value !== ''),
+          debounceTime(800),
+          tap(() => this.setState({ reposFetching: true })),
+          switchMap(value =>
+            ajax.getJSON(userRepos(value)).pipe(
+              timeout(10000),
+              map(res => res as { name: string }[]),
+              map(res => res.map(({ name }) => name)),
+              catchError(() => {
+                this.setState({
+                  reposNotFound: true,
+                  reposFetching: false,
+                })
+                return of([])
+              })
+            )
+          )
+        )
+        .subscribe(reposSuggestions =>
+          this.setState({
+            reposSuggestions,
+            reposFetching: false,
           })
-        ))
-      ).subscribe(reposSuggestions => this.setState({
-        reposSuggestions,
-        reposFetching: false
-      }))
+        )
     } catch (e) {
       console.error(e)
     }
@@ -102,33 +107,24 @@ class Searching extends React.Component<IProps & PropsFromDispatch & IIssuesSear
             value={userName}
           />
         </div>
-        <div className={styles.spinner}>
-          {reposFetching && <Spinner />}
-        </div>
+        <div className={styles.spinner}>{reposFetching && <Spinner />}</div>
         <div className={styles.repoName}>
           <label className={styles.label}>Repository name</label>
-          <InputWithSuggestions
-            name="repoName"
-            onChange={this.handleChange}
-            suggestions={reposSuggestions}
-            value={repoName}
-          />
+          <InputWithSuggestions name="repoName" onChange={this.handleChange} suggestions={reposSuggestions} value={repoName} />
         </div>
         <div>
           <label className={styles.label}>Status</label>
           <RadioGroup
             className={styles.radio}
-            items={[
-              { value: 'all', label: 'All' },
-              { value: 'open', label: 'Open' },
-              { value: 'closed', label: 'Closed' }
-            ]}
+            items={[{ value: 'all', label: 'All' }, { value: 'open', label: 'Open' }, { value: 'closed', label: 'Closed' }]}
             name="issuesState"
             value={issuesState}
             onChange={this.handleChange}
           />
         </div>
-        <Button onClick={this.handleClick} disabled={fetching} loading={fetching}>Search</Button>
+        <Button onClick={this.handleClick} disabled={fetching} loading={fetching}>
+          Search
+        </Button>
       </div>
     )
   }

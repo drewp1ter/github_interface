@@ -21,9 +21,8 @@ export interface IState {
 }
 
 class InputWithSuggestions extends React.Component<IProps, IState> {
-
   static defaultProps: { theme?: string } = {
-    theme: 'default'
+    theme: 'default',
   }
 
   state = {
@@ -56,7 +55,8 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
       const { suggestionIndex, suggestions } = this.state
       const { onChange, name } = this.props
       switch (event.which) {
-        case 40: { // Arrow down
+        case 40: {
+          // Arrow down
           event.preventDefault()
           if (suggestionIndex < suggestions.length - 1) {
             const newSuggestionIndex = suggestionIndex + 1
@@ -65,7 +65,8 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
           }
           break
         }
-        case 38: { // Arrow up
+        case 38: {
+          // Arrow up
           event.preventDefault()
           if (suggestionIndex > 0) {
             const newSuggestionIndex = suggestionIndex - 1
@@ -74,7 +75,8 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
           }
           break
         }
-        case 13: { // Enter
+        case 13: {
+          // Enter
           event.preventDefault()
           suggestionIndex >= 0 && this.selectSuggestion(suggestionIndex)
           break
@@ -103,7 +105,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
       if (suggestions.length >= index - 1) {
         this.setState({
           suggestionIndex: index,
-          showSuggestions: false
+          showSuggestions: false,
         })
         onChange && onChange(suggestions[index], name, true)
       }
@@ -148,16 +150,12 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
           autoComplete="off"
           placeholder={placeholder}
         />
-        {
-          showSuggestions && suggestions!.length > 0 && (
-            <div className={styles.suggestions}>
-              <div className={styles.suggestionNote}>
-                select variant or continue typing
-              </div>
-              {this.suggestionsList()}
-            </div>
-          )
-        }
+        {showSuggestions && suggestions!.length > 0 && (
+          <div className={styles.suggestions}>
+            <div className={styles.suggestionNote}>select variant or continue typing</div>
+            {this.suggestionsList()}
+          </div>
+        )}
       </div>
     )
   }

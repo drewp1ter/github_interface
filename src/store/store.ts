@@ -15,7 +15,7 @@ export const history = createHistory()
 const initialState = {}
 
 const epicMiddleware = createEpicMiddleware<Types.RootAction, Types.RootAction, Types.RootState>({
-  dependencies: services
+  dependencies: services,
 })
 
 const routerMW = routerMiddleware(history)

@@ -5,5 +5,5 @@ import issuesSearching from 'features/issuesSearching'
 
 export default combineReducers({
   routing: routerReducer,
-  issuesViewer: issuesSearching.reducer
+  issuesViewer: issuesSearching.reducer,
 })

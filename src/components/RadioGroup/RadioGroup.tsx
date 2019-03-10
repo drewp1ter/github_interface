@@ -17,13 +17,12 @@ export interface IProps {
 }
 
 const RadioGroup: React.StatelessComponent<IProps> = ({ items, value, name, onChange, className = '', theme = 'default' }) => {
-
   const handleChange = ({ target: { value, name } }: React.ChangeEvent<HTMLInputElement>): void => onChange && onChange(value, name)
 
   return (
     <div className={className}>
-      {
-        items && items.map((item, index) => {
+      {items &&
+        items.map((item, index) => {
           const id = `${name}_${index}`
           return (
             <label key={index} htmlFor={id} className={styles.radio} data-theme={theme}>
@@ -36,11 +35,11 @@ const RadioGroup: React.StatelessComponent<IProps> = ({ items, value, name, onCh
                 className={styles.hidden}
                 checked={item.value === value}
               />
-              <span className={styles.label}></span>{item.label}
+              <span className={styles.label} />
+              {item.label}
             </label>
           )
-        })
-      }
+        })}
     </div>
   )
 }

@@ -24,24 +24,35 @@ export interface IState {
 }
 
 class IssueDetails extends React.Component<IProps, IState> {
-
   state = {
     issue: new Issue(),
-    notFound: false
+    notFound: false,
   }
 
   componentDidMount = () => {
-    const { issues, fetchIssues, match: { params } } = this.props
+    const {
+      issues,
+      fetchIssues,
+      match: { params },
+    } = this.props
     if (issues.userName === params.userName && issues.repoName == params.repoName) {
       const issue = issues.payload.find(issue => issue.id === +params.id)
       issue && this.setState({ issue })
     } else {
-      fetchIssues({ userName: params.userName, repoName: params.repoName, issuesState: 'all' })
+      fetchIssues({
+        userName: params.userName,
+        repoName: params.repoName,
+        issuesState: 'all',
+      })
     }
   }
 
   componentWillReceiveProps = (nextProps: IProps) => {
-    const { issues, error, match: { params } } = nextProps
+    const {
+      issues,
+      error,
+      match: { params },
+    } = nextProps
     const issue = !error.message && issues.payload.find(issue => issue.id === +params.id)
     issue ? this.setState({ issue, notFound: false }) : this.setState({ notFound: true })
   }
@@ -61,7 +72,9 @@ class IssueDetails extends React.Component<IProps, IState> {
           <h4>{issue.title}</h4>
           <pre>{issue.body}</pre>
           <br />
-          <span>#{issue.number} openned on {date}</span>
+          <span>
+            #{issue.number} openned on {date}
+          </span>
         </div>
       </div>
     )

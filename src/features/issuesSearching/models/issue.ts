@@ -1,3 +1,5 @@
+import { User, IUser, IUserDTO } from './user'
+
 export interface IIssuesRequest {
   userName: string
   repoName: string
@@ -10,11 +12,7 @@ export interface IIssueDTO {
   title: string
   body: string
   number: number
-  user: {
-    login: string
-    avatar_url: string
-    html_url: string
-  }
+  user: IUserDTO
 }
 
 export interface IIssue {
@@ -24,27 +22,18 @@ export interface IIssue {
   title: string
   body: string
   number: number
-  user: {
-    login: string
-    avatarUrl: string
-    htmlUrl: string
-  }
+  user: IUser
 }
 
 export class Issue implements IIssue {
-
   constructor(
     public id: number = -1,
     public createdAt: string = '',
     public title: string = '',
     public body: string = '',
     public number: number = -1,
-    public user = {
-      login: '',
-      avatarUrl: '',
-      htmlUrl: ''
-    }
-  ) { }
+    public user = new User()
+  ) {}
 
   get createdAtFormated(): string {
     const date = new Date(this.createdAt)
@@ -52,17 +41,12 @@ export class Issue implements IIssue {
   }
 
   static create(dto: IIssueDTO): IIssue {
-    const model = new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number,
-      { login: dto.user.login, avatarUrl: dto.user.avatar_url, htmlUrl: dto.user.html_url }
-      );
-
-    return model;
+    return new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number, User.create(dto.user))
   }
-
 }
 
 export interface IIssues {
-  userName: string,
-  repoName: string,
+  userName: string
+  repoName: string
   payload: IIssue[]
 }

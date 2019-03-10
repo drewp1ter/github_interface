@@ -12,10 +12,10 @@ const routes: RouteConfig[] = [
       ...issuesSearching.routes,
       {
         path: '*',
-        component: NotFound
-      }
-    ]
-  }
+        component: NotFound,
+      },
+    ],
+  },
 ]
 
 export default routes

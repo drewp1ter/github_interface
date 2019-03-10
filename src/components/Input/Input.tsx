@@ -24,14 +24,11 @@ const Input: React.StatelessComponent<IProps> = ({
   inputRef,
   ...inputProps
 }) => {
-
   const handleChange = ({ target: { value, name } }: React.ChangeEvent<HTMLInputElement>): void => onChange && onChange(value, name)
 
   const inptClass = classNames(styles.input, className, { [styles.hasError]: hasError })
 
-  return (
-    <input type={type} ref={inputRef} className={inptClass} data-theme={theme} onChange={handleChange} {...inputProps} />
-  )
+  return <input type={type} ref={inputRef} className={inptClass} data-theme={theme} onChange={handleChange} {...inputProps} />
 }
 
 export default Input

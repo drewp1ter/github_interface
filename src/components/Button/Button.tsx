@@ -16,21 +16,21 @@ export interface IProps {
 
 const Button: React.StatelessComponent<IProps> = ({
   className = '',
-  children, onClick,
+  children,
+  onClick,
   theme = 'default',
   size = 'sm',
   loading = false,
-  disabled = false
+  disabled = false,
 }) => {
-
   const btnClass = classNames(styles.button, className)
 
   return (
     <button className={btnClass} disabled={disabled} data-theme={theme} data-size={size} onClick={onClick}>
-      <span className={styles.children} data-loading={loading}>{children}</span>
-      {
-        loading && <Spinner className={styles.spinner} type="circle" theme="light" />
-      }
+      <span className={styles.children} data-loading={loading}>
+        {children}
+      </span>
+      {loading && <Spinner className={styles.spinner} type="circle" theme="light" />}
     </button>
   )
 }

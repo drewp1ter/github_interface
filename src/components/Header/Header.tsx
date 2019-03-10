@@ -9,7 +9,6 @@ export interface IProps {
 }
 
 const Header: React.StatelessComponent<IProps> = ({ className, title }) => {
-
   const hdrClass = classNames(styles.header, className)
 
   return (
@@ -19,9 +18,8 @@ const Header: React.StatelessComponent<IProps> = ({ className, title }) => {
   )
 }
 
-
 Header.defaultProps = {
-  className: ''
+  className: '',
 }
 
 export default Header
