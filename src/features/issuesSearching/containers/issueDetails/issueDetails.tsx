@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { RouteComponentProps } from 'react-router'
 
-import { IIssues, IIssue, IIssuesRequest, createIssue } from '../../models'
+import { IIssues, IIssue, IIssuesRequest, Issue } from '../../models'
 import styles from './issueDetails.module.scss'
 import { NotFound } from 'components'
 
@@ -26,7 +26,7 @@ export interface IState {
 class IssueDetails extends React.Component<IProps, IState> {
 
   state = {
-    issue: createIssue(),
+    issue: new Issue(),
     notFound: false
   }
 
@@ -49,19 +49,19 @@ class IssueDetails extends React.Component<IProps, IState> {
   render = () => {
     const { issue, notFound } = this.state
     const { fetching } = this.props
-    const date = new Date(issue.created_at)
+    const date = issue.createdAtFormated
     if (!fetching && notFound) return <NotFound />
     return (
       <div className={styles.item}>
-        <a className={styles.avatar} href={issue.user.html_url}>
-          <img src={issue.user.avatar_url} alt="" />
+        <a className={styles.avatar} href={issue.user.htmlUrl}>
+          <img src={issue.user.avatarUrl} alt="" />
           <div className={styles.nick}>{issue.user.login}</div>
         </a>
         <div className={styles.itemBody}>
           <h4>{issue.title}</h4>
           <pre>{issue.body}</pre>
           <br />
-          <span>#{issue.number} openned on {date.toDateString()}</span>
+          <span>#{issue.number} openned on {date}</span>
         </div>
       </div>
     )

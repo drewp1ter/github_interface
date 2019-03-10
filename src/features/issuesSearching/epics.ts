@@ -7,20 +7,14 @@ import { of } from 'rxjs'
 import { fetchIssues } from './actions'
 import { IssuesSearchingAction } from './reducer'
 import * as apiEndpoints from './apiEndpoints'
-import { IIssue } from './models'
+import { IIssueDTO, Issue } from './models'
 
-const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Types.RootState, Types.Services> = (action$, state$, { ajax, pick }) =>
+const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Types.RootState, Types.Services> = (action$, state$, { ajax }) =>
   action$.pipe(
     filter(isActionOf(fetchIssues.request)),
     switchMap(action => ajax.getJSON(apiEndpoints.repoIssues(action.payload)).pipe(
       timeout(10000),
-      map((res: any) => res.map((item: IIssue) => {
-        const picked = pick<IIssue>(item, ['id', 'number', 'created_at', 'title', 'body', 'user'])
-        return {
-          ...picked,
-          user: pick(picked.user, ['avatar_url', 'login', 'html_url'])
-        }
-      })),
+      map((res: any) => res.map((issue: IIssueDTO) => Issue.create(issue))),
       map(payload => ({
         ...action.payload,
         payload
