@@ -8,7 +8,7 @@ import { Input, Button, InputWithSuggestions, Spinner, RadioGroup } from 'compon
 import { userRepos } from '../../apiEndpoints'
 import { IIssuesRequest } from '../../models'
 import { fetchIssues } from '../../actions'
-import { IIssuesSearchingState } from '../../reducer'
+import { IssuesSearchingState } from '../../reducer'
 import styles from './searching.module.scss'
 
 interface PropsFromDispatch {
@@ -26,7 +26,7 @@ interface IState extends IIssuesRequest {
   readonly reposFetching: boolean
 }
 
-class Searching extends React.Component<IProps & PropsFromDispatch & IIssuesSearchingState, IState> {
+class Searching extends React.Component<IProps & PropsFromDispatch & IssuesSearchingState, IState> {
   static defaultProps = {
     className: '',
   }

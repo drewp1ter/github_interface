@@ -1,5 +1,5 @@
 import { combineEpics } from 'redux-observable'
 
-import { epics as issuesSearchingEpics } from 'features/issuesSearching'
+import { issuesSearchingEpics } from 'features/issuesSearching'
 
-export default combineEpics(...issuesSearchingEpics)
+export default combineEpics(issuesSearchingEpics)

@@ -5,7 +5,7 @@ import { IIssues } from './models'
 import * as actions from './actions'
 import * as types from './actionTypes'
 
-export interface IIssuesSearchingState {
+export type IssuesSearchingState = {
   readonly issues: IIssues
   readonly fetching: boolean
   readonly error: RequestError
@@ -13,7 +13,7 @@ export interface IIssuesSearchingState {
 
 export type IssuesSearchingAction = ActionType<typeof actions>
 
-export default combineReducers<IIssuesSearchingState, IssuesSearchingAction>({
+export default combineReducers<IssuesSearchingState, IssuesSearchingAction>({
   issues: (state = { userName: '', repoName: '', payload: [] }, action) =>
     action.type === types.FETCH_ISSUES_SUCCESS ? action.payload : state,
   fetching: (state = false, action) =>

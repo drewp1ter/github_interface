@@ -2,14 +2,14 @@ import { RouteConfig } from 'react-router-config'
 
 import MainLayout from 'components/MainLayout'
 import NotFound from 'components/NotFound'
-import issuesSearching from 'features/issuesSearching'
+import { issuesSearchingRoutes } from 'features/issuesSearching'
 
 const routes: RouteConfig[] = [
   {
     path: '/',
     component: MainLayout,
     routes: [
-      ...issuesSearching.routes,
+      ...issuesSearchingRoutes,
       {
         path: '*',
         component: NotFound,

@@ -1,10 +1,17 @@
-import * as components from './components'
-import * as containers from './containers'
-import reducer, { IssuesSearchingAction, IIssuesSearchingState } from './reducer'
-import epics from './epics'
-import routes from './routes'
+import * as issuesSearchingComponents from './components'
+import * as issuesSearchingContainers from './containers'
+import issuesSearchingReducer, { IssuesSearchingAction, IssuesSearchingState } from './reducer'
+import issuesSearchingEpics from './epics'
+import issuesSearchingRoutes from './routes'
+import * as issuesSearchingActions from './actions'
 
-export default { components, containers, reducer, routes }
-export { epics }
+export {
+  issuesSearchingComponents,
+  issuesSearchingContainers,
+  issuesSearchingReducer,
+  issuesSearchingRoutes,
+  issuesSearchingEpics,
+  issuesSearchingActions,
+}
 export type IssuesSearchingAction = IssuesSearchingAction
-export type IIssuesSearchingState = IIssuesSearchingState
+export type IssuesSearchingState = IssuesSearchingState
