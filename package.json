@@ -28,7 +28,7 @@
         "eject": "react-scripts eject",
         "tslint": "node_modules/.bin/tslint -p tsconfig.json",
         "typecheck": "tsc -p tsconfig.json",
-        "docker": "docker build -t mufdvr/github_issues ."
+        "docker": "docker build -t mufdvr/github_interface ."
     },
     "eslintConfig": {
         "extends": "react-app"
