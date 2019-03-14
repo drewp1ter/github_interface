@@ -19,7 +19,7 @@ class IssuesSearchingLayout extends React.Component<IssuesSearchingState> {
     const { issues } = this.props
     return (
       <div className={styles.layout}>
-        <Header title="GitHub Inteface" />
+        <Header title="GitHub Interface" />
         <Searching className={styles.searching} />
         <SearchingResults issues={issues} />
       </div>
