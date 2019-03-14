@@ -2,6 +2,7 @@ ARG APP_ROOT=/app
 
 FROM node:10 AS build
 ARG APP_ROOT
+ENV NODE_ENV=production
 WORKDIR ${APP_ROOT}
 ENV PATH ${APP_ROOT}/node_modules/.bin:$PATH
 COPY *.json yarn.lock ./
