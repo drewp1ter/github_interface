@@ -12,7 +12,7 @@ export interface IProps {
   readonly hasError?: boolean
   readonly className?: string
   readonly value?: string | number
-  readonly [key: string]: any //rest
+  readonly [key: string]: any // rest
 }
 
 const Input: React.StatelessComponent<IProps> = ({

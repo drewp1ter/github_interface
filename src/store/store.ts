@@ -11,7 +11,7 @@ import services from '../services'
 
 export const history = createHistory()
 
-//const { loadState } = services.localStorage
+// const { loadState } = services.localStorage
 const initialState = {}
 
 const epicMiddleware = createEpicMiddleware<Types.RootAction, Types.RootAction, Types.RootState>({

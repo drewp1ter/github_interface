@@ -11,30 +11,30 @@ import { fetchIssues } from '../../actions'
 import { IssuesSearchingState } from '../../reducer'
 import styles from './searching.module.scss'
 
-interface PropsFromDispatch {
+export interface IPropsFromDispatch {
   fetchIssues: typeof fetchIssues.request
 }
 
-interface IProps {
+export interface IProps {
   readonly className?: string
 }
 
-interface IState extends IIssuesRequest {
+export interface IState extends IIssuesRequest {
   readonly [key: string]: any
   readonly reposSuggestions: string[]
   readonly reposNotFound: boolean
   readonly reposFetching: boolean
 }
 
-type AllProps = IProps & PropsFromDispatch & IssuesSearchingState
+type AllProps = IProps & IPropsFromDispatch & IssuesSearchingState
 
 class Searching extends React.Component<AllProps, IState> {
-  static defaultProps = {
+  public static defaultProps = {
     className: '',
   }
 
-  state: IState = {
-    userName: 'mufdv',
+  public state: IState = {
+    userName: '',
     repoName: '',
     reposSuggestions: [],
     reposNotFound: false,
@@ -42,22 +42,22 @@ class Searching extends React.Component<AllProps, IState> {
     issuesState: 'all',
   }
 
-  userNameSubscription: any = null
+  public userNameSubscription: any = null
 
-  componentWillUnmount = () => this.userNameSubscription.unsubscribe()
+  public componentWillUnmount = () => this.userNameSubscription.unsubscribe()
 
-  handleChange = (value: string | number, name = 'def', onSelect = false): void =>
+  public handleChange = (value: string | number, name = 'def', onSelect = false): void =>
     this.setState({ [name]: value }, () => onSelect && this.handleClick())
 
-  handleClick = () => {
+  public handleClick = () => {
     const { fetchIssues } = this.props
     const { userName, repoName, issuesState } = this.state
     fetchIssues({ userName, repoName, issuesState })
   }
 
-  fetchRepos = (node: HTMLInputElement) => {
+  public fetchRepos = (node: HTMLInputElement) => {
     try {
-      if (!node) return
+      if (!node) { return }
       this.userNameSubscription = fromEvent(node, 'keyup')
         .pipe(
           tap(() => this.setState({ reposNotFound: false })),
@@ -69,7 +69,7 @@ class Searching extends React.Component<AllProps, IState> {
           switchMap(value =>
             ajax.getJSON(userRepos(value)).pipe(
               timeout(10000),
-              map(res => res as { name: string }[]),
+              map(res => res as Array<{ name: string }>),
               map(res => res.map(({ name }) => name)),
               catchError(() => {
                 this.setState({
@@ -92,7 +92,7 @@ class Searching extends React.Component<AllProps, IState> {
     }
   }
 
-  render = () => {
+  public render = () => {
     const { className, fetching } = this.props
     const { userName, repoName, reposNotFound, reposSuggestions, reposFetching, issuesState } = this.state
     const wrpClass = classNames(styles.wrapper, className)

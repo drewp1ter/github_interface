@@ -5,10 +5,10 @@ import { IIssues } from './models'
 import * as actions from './actions'
 import * as types from './actionTypes'
 
-export type IssuesSearchingState = {
+export interface IssuesSearchingState {
   readonly issues: IIssues
   readonly fetching: boolean
-  readonly error: RequestError
+  readonly error: IRequestError
 }
 
 export type IssuesSearchingAction = ActionType<typeof actions>
@@ -18,5 +18,6 @@ export default combineReducers<IssuesSearchingState, IssuesSearchingAction>({
     action.type === types.FETCH_ISSUES_SUCCESS ? action.payload : state,
   fetching: (state = false, action) =>
     action.type === types.FETCH_ISSUES_REQUEST || (state && !(types.FETCH_ISSUES_SUCCESS || types.FETCH_ISSUES_FAILURE)),
-  error: (state, action) => (action.type === types.FETCH_ISSUES_FAILURE ? action.payload : { message: '', status: 0 }),
+  // tslint:disable-next-line: variable-name
+  error: (_state, action) => (action.type === types.FETCH_ISSUES_FAILURE ? action.payload : { message: '', status: 0 }),
 })

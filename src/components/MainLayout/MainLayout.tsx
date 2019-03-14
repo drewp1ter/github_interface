@@ -13,10 +13,10 @@ const MainLayout: React.StatelessComponent<RouteConfigComponentProps> = ({ route
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
-      closeOnClick
+      closeOnClick={true}
       rtl={false}
-      draggable
-      pauseOnHover
+      draggable={true}
+      pauseOnHover={true}
     />
   </div>
 )

@@ -28,6 +28,15 @@ export interface IIssue {
 }
 
 export class Issue implements IIssue {
+
+  get createdAtFormated(): string {
+    const date = new Date(this.createdAt)
+    return date.toDateString()
+  }
+
+  public static create(dto: IIssueDTO): IIssue {
+    return new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number, dto.state, User.create(dto.user))
+  }
   constructor(
     public id: number = -1,
     public createdAt: string = '',
@@ -37,15 +46,6 @@ export class Issue implements IIssue {
     public state: 'open' | 'closed' = 'open',
     public user = new User()
   ) {}
-
-  get createdAtFormated(): string {
-    const date = new Date(this.createdAt)
-    return date.toDateString()
-  }
-
-  static create(dto: IIssueDTO): IIssue {
-    return new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number, dto.state, User.create(dto.user))
-  }
 }
 
 export interface IIssues {

@@ -21,25 +21,25 @@ export interface IState {
 }
 
 class InputWithSuggestions extends React.Component<IProps, IState> {
-  static defaultProps: { theme?: string } = {
+  public static defaultProps: { theme?: string } = {
     theme: 'default',
   }
 
-  state = {
+  public state = {
     suggestions: this.props.suggestions,
     showSuggestions: false,
     suggestionIndex: -1,
   }
 
-  onInputFocus = () => {
+  public onInputFocus = () => {
     this.setState({ showSuggestions: true })
   }
 
-  onInputBlur = () => {
+  public onInputBlur = () => {
     this.setState({ showSuggestions: false })
   }
 
-  handleChange = ({ target: { value, name = '' } }: React.ChangeEvent<HTMLInputElement>) => {
+  public handleChange = ({ target: { value, name = '' } }: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const { onChange } = this.props
       const suggestions: string[] = this.props.suggestions.filter((suggestion: string) => suggestion.includes(value!))
@@ -50,7 +50,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
     }
   }
 
-  onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  public onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     try {
       const { suggestionIndex, suggestions } = this.state
       const { onChange, name } = this.props
@@ -88,7 +88,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
     }
   }
 
-  onSuggestionClick = (event: React.MouseEvent<HTMLElement>) => {
+  public onSuggestionClick = (event: React.MouseEvent<HTMLElement>) => {
     try {
       const index = event.currentTarget.dataset.index || -1
       this.selectSuggestion(+index)
@@ -98,7 +98,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
     }
   }
 
-  selectSuggestion = (index: number) => {
+  public selectSuggestion = (index: number) => {
     try {
       const { onChange, name = '' } = this.props
       const { suggestions } = this.state
@@ -114,7 +114,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
     }
   }
 
-  suggestionsList = (): JSX.Element[] => {
+  public suggestionsList = (): JSX.Element[] => {
     try {
       return this.state.suggestions.map((suggestion, index) => {
         const suggestionClass = classNames(styles.suggestion, { [styles.suggestionCurrent]: index === this.state.suggestionIndex })
@@ -130,7 +130,7 @@ class InputWithSuggestions extends React.Component<IProps, IState> {
     }
   }
 
-  render = () => {
+  public render = () => {
     const { showSuggestions, suggestions } = this.state
     const { className, name, theme, value, hasError, placeholder } = this.props
     const wrpClass = classNames(styles.container, className)

@@ -13,9 +13,9 @@ export interface IUser {
 }
 
 export class User implements IUser {
-  constructor(public id: number = -1, public login: string = '', public avatarUrl: string = '', public htmlUrl: string = '') {}
 
-  static create(dto: IUserDTO): IUser {
+  public static create(dto: IUserDTO): IUser {
     return new User(dto.id, dto.login, dto.avatar_url, dto.html_url)
   }
+  constructor(public id: number = -1, public login: string = '', public avatarUrl: string = '', public htmlUrl: string = '') {}
 }

@@ -2,13 +2,13 @@ import * as React from 'react'
 
 import styles from './radioGroup.module.scss'
 
-type RadioItem = {
+interface IRadioItem {
   value: string | number
   label: string
 }
 
 export interface IProps {
-  readonly items: RadioItem[]
+  readonly items: IRadioItem[]
   readonly name: string
   readonly onChange?: (value: string | number, name?: string) => void
   readonly className?: string

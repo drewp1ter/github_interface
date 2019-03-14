@@ -8,14 +8,14 @@ import { Header } from 'components'
 import { IssuesSearchingState } from '../../reducer'
 
 class IssuesSearchingLayout extends React.Component<IssuesSearchingState> {
-  componentWillReceiveProps = (nextProps: IssuesSearchingState) => {
+  public componentWillReceiveProps = (nextProps: IssuesSearchingState) => {
     const {
       error: { message },
     } = nextProps
     message && toast.error(message)
   }
 
-  render = () => {
+  public render = () => {
     const { issues } = this.props
     return (
       <div className={styles.layout}>

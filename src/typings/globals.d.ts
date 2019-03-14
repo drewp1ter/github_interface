@@ -1,13 +1,14 @@
+// tslint:disable-next-line
 declare interface Window {
   __REDUX_DEVTOOLS_EXTENSION__: any
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any
 }
 
-declare interface NodeModule {
+declare interface INodeModule {
   hot?: { accept: (path: string, callback: () => void) => void }
 }
 
-declare interface System {
+declare interface ISystem {
   import<T = any>(module: string): Promise<T>
 }
 declare var System: System
@@ -17,7 +18,7 @@ declare module '*.scss' {
   export default content
 }
 
-declare interface RequestError {
+declare interface IRequestError {
   message: string
   status: number
 }

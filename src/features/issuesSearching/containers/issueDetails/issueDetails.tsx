@@ -5,16 +5,16 @@ import { IIssues, IIssue, IIssuesRequest, Issue } from '../../models'
 import styles from './issueDetails.module.scss'
 import { NotFound, Button } from 'components'
 
-export interface MatchParams {
+export interface IMatchParams {
   userName: string
   repoName: string
   id: string
 }
 
-export interface IProps extends RouteComponentProps<MatchParams> {
+export interface IProps extends RouteComponentProps<IMatchParams> {
   readonly issues: IIssues
   readonly fetching: boolean
-  readonly error: RequestError
+  readonly error: IRequestError
   readonly fetchIssues: (request: IIssuesRequest) => void
 }
 
@@ -24,18 +24,18 @@ export interface IState {
 }
 
 class IssueDetails extends React.Component<IProps, IState> {
-  state = {
+  public state = {
     issue: new Issue(),
     notFound: false,
   }
 
-  componentDidMount = () => {
+  public componentDidMount = () => {
     const {
       issues,
       fetchIssues,
       match: { params },
     } = this.props
-    if (issues.userName === params.userName && issues.repoName == params.repoName) {
+    if (issues.userName === params.userName && issues.repoName === params.repoName) {
       const issue = issues.payload.find(issue => issue.id === +params.id)
       issue && this.setState({ issue })
     } else {
@@ -47,7 +47,7 @@ class IssueDetails extends React.Component<IProps, IState> {
     }
   }
 
-  componentWillReceiveProps = (nextProps: IProps) => {
+  public componentWillReceiveProps = (nextProps: IProps) => {
     const {
       issues,
       error,
@@ -57,11 +57,11 @@ class IssueDetails extends React.Component<IProps, IState> {
     issue ? this.setState({ issue, notFound: false }) : this.setState({ notFound: true })
   }
 
-  render = () => {
+  public render = () => {
     const { issue, notFound } = this.state
     const { fetching, history } = this.props
     const date = issue.createdAtFormated
-    if (!fetching && notFound) return <NotFound />
+    if (!fetching && notFound) { return <NotFound /> }
     return (
       <>
         <Button className={styles.backButton} onClick={history.goBack}>Back</Button>

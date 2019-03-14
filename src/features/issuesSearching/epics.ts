@@ -12,7 +12,8 @@ import { IIssueDTO, Issue } from './models'
 
 export const fetchIssuesAction: Epic<IssuesSearchingAction, IssuesSearchingAction, Types.RootState, Types.Services> = (
   action$,
-  state$,
+  // tslint:disable-next-line:variable-name
+  _state$,
   { getJSON }
 ) =>
   action$.pipe(
