@@ -125,7 +125,7 @@ class Searching extends React.Component<AllProps, IState> {
             onChange={this.handleChange}
           />
         </div>
-        <Button className={styles.button} onClick={this.handleClick} disabled={fetching} loading={fetching}>
+        <Button className={styles.button} onClick={this.handleClick} disabled={fetching || !repoName || !userName} loading={fetching}>
           Search
         </Button>
       </div>
