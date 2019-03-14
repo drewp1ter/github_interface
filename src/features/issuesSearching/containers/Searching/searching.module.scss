@@ -12,19 +12,45 @@
 .wrapper {
     display: flex;
     align-items: flex-end;
+    @media screen and (max-width: 820px) {
+        flex-wrap: wrap;
+    }
+    @media screen and (max-width: 500px) {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.radioWrapper {
+    @media screen and (max-width: 750px) {
+        margin-top: 10px;
+        flex: 1;
+    }
+}
+
+.userName {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 100px;
 }
 
 .repoName {
     flex: 1;
+    min-width: 200px;
     margin-right: 20px;
+    @media screen and (max-width: 765px) {
+        margin: 0;
+    }
 }
 
 .spinner {
+    min-width: 50px;
     width: 50px;
-}
-
-.userNameInput {
-    width: 200px;
+    height: 28px;
+    @media screen and (max-width: 500px) {
+        width: 100%;
+    }
 }
 
 .label {
@@ -34,4 +60,7 @@
 
 .button {
     height: 28px;
+    @media screen and (max-width: 820px) {
+        margin-top: 10px;
+    }
 }

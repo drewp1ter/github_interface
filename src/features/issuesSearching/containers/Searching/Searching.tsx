@@ -57,7 +57,9 @@ class Searching extends React.Component<AllProps, IState> {
 
   public fetchRepos = (node: HTMLInputElement) => {
     try {
-      if (!node) { return }
+      if (!node) {
+        return
+      }
       this.userNameSubscription = fromEvent(node, 'keyup')
         .pipe(
           tap(() => this.setState({ reposNotFound: false })),
@@ -98,10 +100,9 @@ class Searching extends React.Component<AllProps, IState> {
     const wrpClass = classNames(styles.wrapper, className)
     return (
       <div className={wrpClass}>
-        <div>
+        <div className={styles.userName}>
           <label className={styles.label}>User name</label>
           <Input
-            className={styles.userNameInput}
             inputRef={this.fetchRepos}
             onChange={this.handleChange}
             hasError={reposNotFound}
@@ -114,7 +115,7 @@ class Searching extends React.Component<AllProps, IState> {
           <label className={styles.label}>Repository name</label>
           <InputWithSuggestions name="repoName" onChange={this.handleChange} suggestions={reposSuggestions} value={repoName} />
         </div>
-        <div>
+        <div className={styles.radioWrapper}>
           <label className={styles.label}>Status</label>
           <RadioGroup
             className={styles.radio}
@@ -124,7 +125,7 @@ class Searching extends React.Component<AllProps, IState> {
             onChange={this.handleChange}
           />
         </div>
-        <Button onClick={this.handleClick} disabled={fetching} loading={fetching}>
+        <Button className={styles.button} onClick={this.handleClick} disabled={fetching} loading={fetching}>
           Search
         </Button>
       </div>

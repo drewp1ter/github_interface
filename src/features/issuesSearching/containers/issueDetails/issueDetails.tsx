@@ -72,7 +72,7 @@ class IssueDetails extends React.Component<IProps, IState> {
           </a>
           <div className={styles.itemBody}>
             <h4>{issue.title}</h4>
-            <pre>{issue.body}</pre>
+            <pre className={styles.body}>{issue.body}</pre>
             <br />
             <span>
               #{issue.number} openned on {date}. State: {issue.state}

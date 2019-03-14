@@ -18,7 +18,7 @@ describe('Issues searching Epics', () => {
 
   it('fetch issues success and create models', done => {
     const services: any = {
-      getJSON: (url: string): any => of(fx),
+      getJSON: (_url: string): any => of(fx),
     }
 
     epics
@@ -49,7 +49,7 @@ describe('Issues searching Epics', () => {
 
   it('fetch issues failure by network', done => {
     const services: any = {
-      getJSON: (url: string): any => throwError({ message: 'Network Error' }),
+      getJSON: (_url: string): any => throwError({ message: 'Network Error' }),
     }
 
     epics
@@ -68,7 +68,7 @@ describe('Issues searching Epics', () => {
 
   it('fetch issues failure by 404', done => {
     const services: any = {
-      getJSON: (url: string): any =>
+      getJSON: (_url: string): any =>
         throwError({
           status: 404,
           response: {
