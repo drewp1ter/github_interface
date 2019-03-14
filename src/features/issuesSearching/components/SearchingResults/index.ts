@@ -1,3 +1,3 @@
 import SearchingResults from './SearchingResults'
 
-export { SearchingResults }
+export default SearchingResults

@@ -1,5 +1,5 @@
 import Searching from './Searching'
-import SearchingResults from './SearchingResults'
+import IssuesSearchingLayout from './IssuesSearchingLayout'
 import IssueDetails from './issueDetails'
 
-export { Searching, SearchingResults, IssueDetails }
+export { Searching, IssuesSearchingLayout, IssueDetails }

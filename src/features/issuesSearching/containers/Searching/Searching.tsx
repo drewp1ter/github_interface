@@ -26,7 +26,9 @@ interface IState extends IIssuesRequest {
   readonly reposFetching: boolean
 }
 
-class Searching extends React.Component<IProps & PropsFromDispatch & IssuesSearchingState, IState> {
+type AllProps = IProps & PropsFromDispatch & IssuesSearchingState
+
+class Searching extends React.Component<AllProps, IState> {
   static defaultProps = {
     className: '',
   }

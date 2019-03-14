@@ -23,7 +23,7 @@ const SearchingResults: React.StatelessComponent<IProps> = ({ issues }) => {
               <h4>{issue.title}</h4>
             </Link>
             <span>
-              #{issue.number} openned on {date}
+              #{issue.number} openned on {date}. State: {issue.state}
             </span>
           </div>
         </div>

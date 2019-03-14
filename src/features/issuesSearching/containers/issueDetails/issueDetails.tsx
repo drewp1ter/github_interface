@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router'
 
 import { IIssues, IIssue, IIssuesRequest, Issue } from '../../models'
 import styles from './issueDetails.module.scss'
-import { NotFound } from 'components'
+import { NotFound, Button } from 'components'
 
 export interface MatchParams {
   userName: string
@@ -59,24 +59,27 @@ class IssueDetails extends React.Component<IProps, IState> {
 
   render = () => {
     const { issue, notFound } = this.state
-    const { fetching } = this.props
+    const { fetching, history } = this.props
     const date = issue.createdAtFormated
     if (!fetching && notFound) return <NotFound />
     return (
-      <div className={styles.item}>
-        <a className={styles.avatar} href={issue.user.htmlUrl}>
-          <img src={issue.user.avatarUrl} alt="" />
-          <div className={styles.nick}>{issue.user.login}</div>
-        </a>
-        <div className={styles.itemBody}>
-          <h4>{issue.title}</h4>
-          <pre>{issue.body}</pre>
-          <br />
-          <span>
-            #{issue.number} openned on {date}
-          </span>
+      <>
+        <Button className={styles.backButton} onClick={history.goBack}>Back</Button>
+        <div className={styles.item}>
+          <a className={styles.avatar} href={issue.user.htmlUrl}>
+            <img src={issue.user.avatarUrl} alt="" />
+            <div className={styles.nick}>{issue.user.login}</div>
+          </a>
+          <div className={styles.itemBody}>
+            <h4>{issue.title}</h4>
+            <pre>{issue.body}</pre>
+            <br />
+            <span>
+              #{issue.number} openned on {date}. State: {issue.state}
+            </span>
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 }

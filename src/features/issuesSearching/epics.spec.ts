@@ -32,11 +32,12 @@ describe('Issues searching Epics', () => {
             repoName: request.repoName,
             payload: [
               new Issue(
-                333142267,
-                '2018-06-18T06:01:34Z',
-                'Перевести проекты в закрытый раздел ',
-                'Нужно перевести проект в закрытый раздел и добавить меня в админы',
-                3,
+                333142028,
+                '2018-06-18T05:59:56Z',
+                'Создать docker контейнеры',
+                'Создать продакшн контейнер для фронта',
+                2,
+                'closed',
                 new User(13976639, 'evilosa', 'https://avatars3.githubusercontent.com/u/13976639?v=4', 'https://github.com/evilosa')
               ),
             ],

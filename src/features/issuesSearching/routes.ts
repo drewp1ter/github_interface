@@ -1,13 +1,12 @@
 import { RouteConfig } from 'react-router-config'
 
-import * as components from './components'
 import * as containers from './containers'
 
 const routes: RouteConfig[] = [
   {
     path: '/',
     exact: true,
-    component: components.IssuesSearching,
+    component: containers.IssuesSearchingLayout,
   },
   {
     path: '/issue_details/:userName/:repoName/:id',

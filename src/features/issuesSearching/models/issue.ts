@@ -12,6 +12,7 @@ export interface IIssueDTO {
   title: string
   body: string
   number: number
+  state: 'closed' | 'open',
   user: IUserDTO
 }
 
@@ -22,6 +23,7 @@ export interface IIssue {
   title: string
   body: string
   number: number
+  state: 'open' | 'closed'
   user: IUser
 }
 
@@ -32,6 +34,7 @@ export class Issue implements IIssue {
     public title: string = '',
     public body: string = '',
     public number: number = -1,
+    public state: 'open' | 'closed' = 'open',
     public user = new User()
   ) {}
 
@@ -41,7 +44,7 @@ export class Issue implements IIssue {
   }
 
   static create(dto: IIssueDTO): IIssue {
-    return new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number, User.create(dto.user))
+    return new Issue(dto.id, dto.created_at, dto.title, dto.body, dto.number, dto.state, User.create(dto.user))
   }
 }
 
