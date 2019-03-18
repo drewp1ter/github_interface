@@ -16,7 +16,6 @@
         "@types/react-router-redux": "^5.0.18",
         "@types/react-toastify": "^4.0.2",
         "@types/redux": "^3.6.0",
-        "add": "^2.0.6",
         "classnames": "^2.2.6",
         "history": "^4.7.2",
         "node-sass": "^4.11.0",
